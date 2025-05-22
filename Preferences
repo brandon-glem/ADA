@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int mergeandcount(vector<int>& arr, int left, int mid, int right) {
+    int inverciones = 0;
+    vector<int> temp(right - left + 1);
+
+    int i = left;
+    int j = mid + 1;
+    int k = 0;
+
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j])
+            temp[k++] = arr[i++];
+        else {
+            inverciones += (mid - i + 1);
+            temp[k++] = arr[j++];
+        }
+    }
+
+    while (i <= mid) {
+        temp[k++] = arr[i++];
+    }
+
+    while (j <= mid) {
+        temp[k++] = arr[i++];
+    }
+
+    for (int l = 0; l < k; l++)
+        arr[left + l] = temp[l];
+
+    return inverciones;
+}
+
+int sortandcount(vector<int>& arr, int left, int right) {
+    int inversion = 0;
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        inversion += sortandcount(arr, left, mid);
+
+        inversion += sortandcount(arr, mid + 1, right);
+
+        inversion += mergeandcount(arr, left, mid, right);
+    }
+    return inversion;
+}
+
+int main()
+{
+    vector<int> A = { 1,5,4,8,10,2,6,9,12,11,3,7 };
+    for (int x : A) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    vector<int> B = A;
+    int invert = sortandcount(B, 0, B.size() - 1);
+    cout << invert<<endl;
+}
