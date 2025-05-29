@@ -18,7 +18,7 @@ long long int calcular_ganacia(int tiendas, int exclusiones, vector<int>& pagos,
     for (int i = 0; i < tiendas; i++)
         total += ganacia[i];
 
-    for (int i = 0; i < min(exclusiones, tiendas), i++) {
+    for (int i = 0; i < min(exclusiones, tiendas); i++) {
         if (ganacia[i] < 0)
             total -= ganacia[i];
         else
@@ -33,11 +33,11 @@ int main()
     cin >> casos;
     vector<long long int> resultados(casos);
 
-    for (int c = 0; c < casos; casos++) {
+    for (int c = 0; c < casos; c++) {
         int tiendas, exclusiones;
         cin >> tiendas >> exclusiones;
 
-        vector<int>T(tiendas), E(exclusiones);
+        vector<int>T(tiendas), E(tiendas);
 
         for (int i = 0; i < tiendas; i++)
             cin >> T[i];
@@ -46,5 +46,14 @@ int main()
             cin >> E[i];
 
         resultados[c] = calcular_ganacia(tiendas, exclusiones, T, E);
+    }
+    
+    for (int c = 0; c < casos; c++) {
+        if (resultados[c] > 0) {
+            cout << "Case " << c+1 << ": " << resultados[c] << endl;
+        }
+        else {
+            cout << "Case " << c+1 << ": no hay ganancia" << endl;
+        }
     }
 }
