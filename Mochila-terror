@@ -31,9 +31,9 @@ int main()
 {
     int casos;
     cin >> casos;
-    vector<int> resultados(casos);
+    vector<long long int> resultados(casos);
 
-    for (int c = 1; c <= casos; casos++) {
+    for (int c = 0; c < casos; casos++) {
         int tiendas, exclusiones;
         cin >> tiendas >> exclusiones;
 
@@ -44,6 +44,7 @@ int main()
 
         for (int i = 0; i < tiendas; i++)
             cin >> E[i];
-        
+
+        resultados[c] = calcular_ganacia(tiendas, exclusiones, T, E);
     }
 }
