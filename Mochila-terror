@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+long long int calcular_ganacia(int tiendas, int exclusiones, vector<int>& pagos, vector<int>& dinero) {
+    vector<int> ganacia(tiendas);
+
+    for (int i = 0; i < tiendas; i++) {
+        ganacia[i] = dinero[i] - pagos[i];
+    }
+
+    sort(ganacia.begin(), ganacia.end());
+
+    long long int total = 0;
+
+    for (int i = 0; i < tiendas; i++)
+        total += ganacia[i];
+
+    for (int i = 0; i < min(exclusiones, tiendas), i++) {
+        if (ganacia[i] < 0)
+            total -= ganacia[i];
+        else
+            break;
+    }
+    return total;
+}
+
+int main()
+{
+    int casos;
+    cin >> casos;
+    vector<int> resultados(casos);
+
+    for (int c = 1; c <= casos; casos++) {
+        int tiendas, exclusiones;
+        cin >> tiendas >> exclusiones;
+
+        vector<int>T(tiendas), E(exclusiones);
+
+        for (int i = 0; i < tiendas; i++)
+            cin >> T[i];
+
+        for (int i = 0; i < tiendas; i++)
+            cin >> E[i];
+        
+    }
+}
